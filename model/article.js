@@ -25,4 +25,11 @@ const articleSchema = new mongoose.Schema(
   }
 );
 
+// Text index for article search
+articleSchema.index({
+  title: "text",
+  content: "text",
+  author: "text",
+});
+
 module.exports = mongoose.model("Article", articleSchema);

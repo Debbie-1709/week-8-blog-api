@@ -59,6 +59,35 @@ const getAllArticle = async (req, res, next) => {
     next(error);
   }
 };
+
+
+// Search Articles
+const searchArticles = async (req, res, next) => {
+  try {
+    const { q } = req.query;
+
+    if (!q) {
+      return res.status(400).json({
+        message: "Please provide a search keyword",
+      });
+    }
+
+    const articles = await ArticleModel.find({
+      $text: {
+        $search: q,
+      },
+    });
+
+    return res.status(200).json({
+      message: "Articles searched successfully",
+      data: articles,
+    });
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+};
+
 // Get Article By ID
 const getArticleById = async (req, res, next) => {
   try {
@@ -149,6 +178,7 @@ module.exports = {
   home,
   postArticle,
   getAllArticle,
+  searchArticles,
   getArticleById,
   updateArticleById,
   deleteArticleById,

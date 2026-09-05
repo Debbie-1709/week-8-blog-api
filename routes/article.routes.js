@@ -4,6 +4,7 @@ const {
   home,
   postArticle,
   getAllArticle,
+  searchArticles,
   getArticleById,
   updateArticleById,
   deleteArticleById,
@@ -19,6 +20,9 @@ router.post("/articles", postArticle);
 
 // Get all articles
 router.get("/articles", getAllArticle);
+
+// Search articles
+router.get("/articles/search", searchArticles);
 
 // Get a single article by ID
 router.get("/articles/:id", getArticleById);
