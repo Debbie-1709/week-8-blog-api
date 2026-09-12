@@ -9,7 +9,9 @@ const cors = require("cors");
 const connectDB = require("./database/db.js");
 const RequestLogger = require("./middlewares/logger.js");
 const errorhandler = require("./middlewares/errorhandler.js");
+
 const articleRoutes = require("./routes/article.routes.js");
+const userRoutes = require("./routes/user.routes.js");
 
 const app = express();
 
@@ -22,7 +24,8 @@ app.use(cors());
 app.use(RequestLogger);
 
 // Routes
-app.use("/", articleRoutes);
+app.use("/api/article", articleRoutes);
+app.use("/api/auth", userRoutes);
 
 // Error handling middleware
 app.use(errorhandler);
@@ -31,5 +34,5 @@ app.use(errorhandler);
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
-  console.log(`Server on port ${PORT}`);
+    console.log(`Server running on port ${PORT}`);
 });
